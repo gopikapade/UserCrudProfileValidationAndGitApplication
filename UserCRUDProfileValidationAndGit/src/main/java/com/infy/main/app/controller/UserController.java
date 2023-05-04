@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infy.main.app.model.User;
@@ -41,6 +44,18 @@ public class UserController {
 		
 		return entity;
 		
+		
+		
+	}
+	
+	@PutMapping("/updateuser/{userid}")
+	public ResponseEntity<BaseResponse<User>> updateuser(@PathVariable int userid,@RequestBody User user)
+	{
+		User userupdate=userservice.updateUser(userid,user);
+		BaseResponse<User> baseResponse=new BaseResponse<User>(200, new Date(), "Data Updated Sucessfully", userupdate);
+		ResponseEntity<BaseResponse<User>> entity=new ResponseEntity<BaseResponse<User>>(baseResponse, HttpStatus.OK);
+		
+				return entity;
 		
 		
 	}
