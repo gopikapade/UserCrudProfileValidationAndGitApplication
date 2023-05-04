@@ -66,5 +66,13 @@ public class GlobalExceptionHandeller {
 		
 	}
 	
+	@ExceptionHandler(DataNotFoundInDataBase.class)
+	public ApiError Datanotfoundindatabase(DataNotFoundInDataBase exception,HttpServletRequest request)
+	{
+		ApiError apiError = new ApiError(HttpStatus.NOT_FOUND.value(), exception.getMessage(), new Date(), HttpStatus.NOT_FOUND, request.getRequestURI());
+		
+		return apiError;
+	}
+	
 
 }

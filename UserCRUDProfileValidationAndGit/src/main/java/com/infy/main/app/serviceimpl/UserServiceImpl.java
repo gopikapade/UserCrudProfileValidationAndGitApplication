@@ -1,9 +1,12 @@
 package com.infy.main.app.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.infy.main.app.exception.ContatctNotValidException;
+import com.infy.main.app.exception.DataNotFoundInDataBase;
 import com.infy.main.app.exception.EmailIdNotValidException;
 import com.infy.main.app.exception.FirstnameNotValidException;
 import com.infy.main.app.exception.LastnameNotValidException;
@@ -65,6 +68,20 @@ public class UserServiceImpl implements UserService {
 		
 		 
 		 
+	}
+
+	@Override
+	public List<User> getalluser() {
+		List<User> findAll = userrepositry.findAll();
+		
+		if(findAll.isEmpty()) {
+			
+			throw new DataNotFoundInDataBase("Data Is Not Present In Database");
+			
+		}
+		else{	
+				return findAll;
+		}
 	}
 	
 
